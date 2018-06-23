@@ -1,0 +1,76 @@
+//泡泡堂--炸弹超人
+#include<stdio.h>
+int main()
+{
+	char a[20][21];
+	int i,j,x,y,p,q,sum,m,n,map=0;
+	printf("请输入地图尺寸大小:");
+	scanf("%d",&n);
+	scanf("%d",&m);
+	//输出地图上每个点的数据
+	printf("请输入地图上的每个点：\n");
+	for(i=0;i<=n-1;i++)
+		scanf("%s",a[i]);
+	//遍历地图上的每一个点
+	for(i=0;i<=n-1;i++)
+		for(j=0;j<=m-1;j++)
+		{
+			if(a[i][j]=='.')
+			{
+				sum=0;
+				x=i;
+				y=j;
+				//向下统计 
+				while(a[x][y]!='#')
+				{
+					if(a[x][y]=='G')
+					{
+						sum++;
+						x++;
+					}
+				}
+				//向上统计
+				x=i;
+				y=j;
+				while(a[x][y]!='#')
+				{
+					if(a[x][y]=='G')
+					{
+						sum++;
+						x--;
+					}
+				}
+				//向左统计 
+				x=i;
+				y=j;
+				while(a[x][y]!='#')
+				{
+					if(a[x][y]=='G')
+					{
+						sum++;
+						y--;
+					}
+				}
+				//向右统计
+				x=i;
+				y=j; 
+				while(a[x][y]!='#')
+				{
+					if(a[x][y]=='G')
+					{
+						sum++;
+						y++;
+					}
+				}
+				//对地图上可消灭的敌人进行统计，更新map值
+				if(sum>map)
+				{
+					map=sum;
+					q=i;
+					p=j;
+				} 
+			}
+		}
+		printf("在(%d,%d)的位置上消灭的敌人最多，有%d个人\n",q,p,map);
+		return 0; 
+} 
